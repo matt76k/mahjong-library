@@ -1,2 +1,2 @@
-RML - Library for Mahjong
+Library for Mahjong
 ===

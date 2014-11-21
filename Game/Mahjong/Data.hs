@@ -18,6 +18,31 @@ data Tile = WAN Int Bool | PIN Int Bool | SOU Int Bool
           | TON | NAN | SHA | PEI
           | HAKU | HATSU | CHUN deriving Ord
 
+instance Enum Tile where
+    toEnum i  | i < 9 = WAN (i + 1) False
+              | i < 18 = PIN (i - 8) False
+              | i < 27 = SOU (i - 17) False
+              | i < 31 = [TON, NAN, SHA, PEI] !! (i - 27)
+              | otherwise = [HAKU, HATSU, CHUN] !! (i - 31)
+
+    fromEnum (WAN n _) = n - 1
+    fromEnum (PIN n _) = n + 8
+    fromEnum (SOU n _) = n + 17
+    fromEnum TON = 27
+    fromEnum NAN = 28
+    fromEnum SHA = 29
+    fromEnum PEI = 30
+    fromEnum HAKU = 31
+    fromEnum HATSU = 32
+    fromEnum CHUN = 33
+
+    succ PEI = TON
+    succ CHUN = HAKU
+    succ (WAN 9 _) = WAN 1 False
+    succ (PIN 9 _) = PIN 1 False
+    succ (SOU 9 _) = SOU 1 False
+    succ t = (toEnum . (+ 1)  . fromEnum) t
+
 instance Eq Tile where
     (WAN n1 _) == (WAN n2 _) = n1 == n2
     (PIN n1 _) == (PIN n2 _) = n1 == n2
