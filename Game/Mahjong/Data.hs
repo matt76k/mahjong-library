@@ -1,5 +1,6 @@
-module Game.Mahjong.Data
-where
+module Game.Mahjong.Data (
+  Tile(..)
+) where
 
 import Data.List as L
 import Data.Random hiding (shuffle)
@@ -8,7 +9,7 @@ import Data.Random.Extras
 
 data WinType = TSUMO | RON
 
-data KIND = MANZ
+data Kind = MANZ
           | PINZ
           | SOUZ
           | WIND
@@ -70,6 +71,11 @@ instance Show Tile where
     show HAKU = "白"
     show HATSU = "發"
     show CHUN = "中"
+
+data Melds = TOITSU [Tile] Bool
+           | SHUNTSU [Tile] Bool
+           | KOUTSU [Tile] Bool
+           | KANTSU [Tile] Bool deriving Show
 
 makeWalls :: (MonadRandom m) => m [Tile]
 makeWalls = runRVar (shuffle $ five ++ noFive) StdRandom
