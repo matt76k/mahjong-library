@@ -1,5 +1,5 @@
 module Game.Mahjong.Tools (
-  makeWalls
+  makeWalls, isTANYAO
 ) where
 
 import Game.Mahjong.Data
@@ -7,6 +7,12 @@ import Data.List as L
 import Data.Random hiding (shuffle)
 import Data.Random.Source.Std
 import Data.Random.Extras
+
+isTANYAO :: Tile -> Bool
+isTANYAO (WAN n _) = n /=1 && n /= 9
+isTANYAO (PIN n _) = n /=1 && n /= 9
+isTANYAO (SOU n _) = n /=1 && n /= 9
+isTANYAO _ = False
 
 makeWalls :: (MonadRandom m) => m [Tile]
 makeWalls = runRVar (shuffle $ five ++ noFive) StdRandom

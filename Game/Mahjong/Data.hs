@@ -9,7 +9,7 @@ import Data.Random.Extras
 
 data WinType = TSUMO | RON
 
-data Kind = MANZ
+data Kind = WANZ
           | PINZ
           | SOUZ
           | WIND

@@ -5,5 +5,7 @@ import Data.List as L
 
 main = do
         walls <- makeWalls
-        print $ convertFrom $ concatMap show $ L.sort $ take 13 walls
-        print $ L.sort $ take 13 walls
+        let hand = L.sort $ take 13 walls
+        print $ convertFrom $ concatMap show hand
+        print hand
+        print $ map isTANYAO hand
